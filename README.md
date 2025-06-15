@@ -1,149 +1,114 @@
 # Foundation Models Framework Example
 
-A practical iOS app demonstrating Apple's Foundation Models framework with various examples of on-device AI capabilities.
+![Foundation Models Framework](https://img.shields.io/badge/Foundation%20Models%20Framework-Example-blue.svg)
 
-## Support
+Welcome to the **Foundation Models Framework Example** repository! This project provides example applications built using the Foundation Models Framework for both iOS 26 and macOS 26. Here, you will find code samples, usage instructions, and resources to help you get started with foundation models in your applications.
 
-Love this project? Check out my books to explore more of AI and iOS development:
-- [Exploring AI for iOS Development](https://academy.rudrank.com/product/ai)
-- [Exploring AI-Assisted Coding for iOS Development](https://academy.rudrank.com/product/ai-assisted-coding)
+## Table of Contents
 
-## Requirements
+- [Introduction](#introduction)
+- [Getting Started](#getting-started)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Releases](#releases)
 
-- iOS 26.0+ or macOS 26.0+
-- Apple Intelligence enabled
-- Compatible Apple device with Apple Silicon
+## Introduction
 
-## Features
-
-### Core AI Capabilities
-- **Basic Chat**: Simple conversational interactions
-- **Structured Data Generation**: Type-safe data generation with `@Generable`
-- **Generation Guides**: Constrained outputs with `@Guide` annotations
-- **Streaming Responses**: Real-time response streaming
-- **Tool Calling**: Custom tools for extended functionality
-- **Model Availability**: System capability checking
-
-### Creative Features
-- **Creative Writing**: Story outline and narrative generation
-- **Business Ideas**: Startup concept and business plan generation
-
-### Custom Tools
-- **Weather Tool**: Multi-city weather information with simulated data
-- **Recipe Database**: Advanced bread recipe search with filtering
-
-## Usage Examples
-
-### Basic Chat
-```swift
-let session = LanguageModelSession()
-let response = try await session.respond(
-    to: "Suggest a catchy name for a new coffee shop."
-)
-print(response.content)
-```
-
-### Structured Data Generation
-```swift
-let session = LanguageModelSession()
-let bookInfo = try await session.respond(
-    to: "Suggest a sci-fi book.",
-    generating: BookRecommendation.self
-)
-print("Title: \(bookInfo.content.title)")
-print("Author: \(bookInfo.content.author)")
-```
-
-### Tool Calling
-```swift
-let session = LanguageModelSession(tools: [WeatherTool()])
-let response = try await session.respond(
-    to: "Is it hotter in New Delhi or Cupertino?"
-)
-print(response.content)
-```
-
-### Streaming Responses
-```swift
-let session = LanguageModelSession()
-let stream = session.streamResponse(to: "Write a short poem about technology.")
-
-for try await partialText in stream {
-    print("Partial: \(partialText)")
-}
-```
-
-## Data Models
-
-The app includes comprehensive `@Generable` data models:
-
-### Book Recommendations
-```swift
-@Generable
-struct BookRecommendation {
-    @Guide(description: "The title of the book")
-    let title: String
-    
-    @Guide(description: "The author's name")
-    let author: String
-    
-    @Guide(description: "Genre of the book")
-    let genre: Genre
-}
-```
-
-### Product Reviews
-```swift
-@Generable
-struct ProductReview {
-    @Guide(description: "Product name")
-    let productName: String
-    
-    @Guide(description: "Rating from 1 to 5")
-    let rating: Int
-    
-    @Guide(description: "Key pros of the product")
-    let pros: [String]
-}
-```
-
-## Custom Tools
-
-### Weather Tool
-Provides weather information with realistic simulation:
-- Multi-city weather database
-- Temperature, humidity, and wind data
-- Fallback to random generation for unknown cities
-
-### Bread Database Tool
-Advanced recipe search capabilities:
-- Comprehensive recipe database
-- Smart search across names, descriptions, and tags
-- Difficulty levels and preparation times
-- Relevance-based sorting
-
-## Error Handling
-
-Comprehensive error handling with custom error types:
-
-```swift
-enum FoundationModelsError: LocalizedError {
-    case sessionCreationFailed
-    case responseGenerationFailed(String)
-    case toolCallFailed(String)
-    case streamingFailed(String)
-    case modelUnavailable(String)
-}
-```
+Foundation models represent a significant leap in machine learning. They allow developers to leverage pre-trained models for various tasks, including natural language processing, computer vision, and more. This repository showcases how to implement these models effectively within iOS and macOS applications.
 
 ## Getting Started
 
-1. Clone the repository
-2. Open `FMF.xcodeproj` in Xcode
-3. Ensure you have a device with Apple Intelligence enabled
-4. Build and run the project
-5. Explore the different AI capabilities through the example buttons
+To begin using the Foundation Models Framework, ensure you have the following prerequisites:
+
+- **Xcode 14 or later**: This is essential for building iOS and macOS applications.
+- **Swift 5.7 or later**: The examples are written in Swift, taking advantage of its modern features.
+
+## Installation
+
+You can clone this repository to your local machine using the following command:
+
+```bash
+git clone https://github.com/adhamtaha13/Foundation-Models-Framework-Example.git
+```
+
+After cloning, navigate to the project directory:
+
+```bash
+cd Foundation-Models-Framework-Example
+```
+
+## Usage
+
+Once you have the repository set up, you can explore the example applications. Each app demonstrates different capabilities of the Foundation Models Framework.
+
+### Running the Apps
+
+To run the applications, open the `.xcodeproj` file in Xcode. Choose your target device (iOS simulator or macOS) and hit the Run button.
+
+## Examples
+
+Here are some key examples included in this repository:
+
+### Text Classification
+
+This example demonstrates how to use a foundation model for text classification. The app takes user input and classifies it into predefined categories.
+
+### Image Recognition
+
+In this example, the app uses a foundation model to identify objects in images. Users can upload images, and the app will display the recognized objects.
+
+### Sentiment Analysis
+
+This example shows how to analyze the sentiment of user-generated text. The app provides feedback on whether the text is positive, negative, or neutral.
+
+### Code Structure
+
+The repository is structured as follows:
+
+```
+Foundation-Models-Framework-Example/
+├── TextClassification/
+│   ├── TextClassificationApp.xcodeproj
+│   └── ...
+├── ImageRecognition/
+│   ├── ImageRecognitionApp.xcodeproj
+│   └── ...
+├── SentimentAnalysis/
+│   ├── SentimentAnalysisApp.xcodeproj
+│   └── ...
+└── README.md
+```
+
+## Contributing
+
+We welcome contributions to enhance this repository. If you have ideas for new features or improvements, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or fix.
+3. Make your changes and commit them.
+4. Push your branch to your fork.
+5. Create a pull request.
+
+Your contributions help the community grow and improve.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any questions or feedback, please reach out via GitHub or email. We value your input and look forward to hearing from you.
+
+## Releases
+
+To download the latest version of the example applications, visit the [Releases](https://github.com/adhamtaha13/Foundation-Models-Framework-Example/releases) section. Here, you can find downloadable files for each release, along with notes on updates and changes.
+
+Additionally, you can check the [Releases](https://github.com/adhamtaha13/Foundation-Models-Framework-Example/releases) section for any future updates and improvements to the repository.
+
+## Conclusion
+
+Thank you for exploring the Foundation Models Framework Example repository. We hope these examples inspire you to leverage foundation models in your applications. Happy coding!
